@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillSwap Matchmaker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      background-color: #ffffffcc;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 4rem auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    select, input, button {
+      margin: 1rem 0;
+      padding: 0.75rem;
+      font-size: 1rem;
+      width: 90%;
+      max-width: 450px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+    }
+    .result {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #2c3e50;
+      background-color: #ecf0f1;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SkillSwap Student Matchmaker</h1>
+
+    <input type="text" id="name" placeholder="Full Name" required />
+    <input type="email" id="email" placeholder="Personal Email Address" required />
+    <input type="text" id="grade" placeholder="Grade Level (e.g. 10th, 11th)" required />
+    <input type="text" id="academics" placeholder="Current Academic Focus or Pathway" required />
+    <input type="text" id="activities" placeholder="Clubs, electives, or programs you are involved in" />
+
+    <select id="hobby">
+      <option value="">-- Choose a Hobby --</option>
+      <option value="tech">Tech & Coding</option>
+      <option value="creative">Art & Design</option>
+      <option value="writing">Writing & Communication</option>
+      <option value="math">Math & Finance</option>
+      <option value="organizing">Planning & Organizing</option>
+      <option value="media">Photography & Video</option>
+    </select>
+
+    <select id="study">
+      <option value="">-- What do you like to study? --</option>
+      <option value="marketing">Marketing & Business</option>
+      <option value="finance">Finance & Economics</option>
+      <option value="it">Information Technology</option>
+      <option value="communications">Media & Communications</option>
+      <option value="arts">Creative Arts</option>
+    </select>
+
+    <select id="skill">
+      <option value="">-- Choose Your Strongest Skill --</option>
+      <option value="social">Social Media & Content Creation</option>
+      <option value="design">Graphic Design & Branding</option>
+      <option value="finance">Bookkeeping & Financial Organization</option>
+      <option value="event">Event Planning & Coordination</option>
+      <option value="photo">Photography & Videography</option>
+      <option value="web">Web Design & Tech Help</option>
+      <option value="service">Customer Service & Communication</option>
+      <option value="editing">Video Editing & Animation</option>
+      <option value="writing">Copywriting & Journalism</option>
+      <option value="research">Research & Analysis</option>
+    </select>
+
+    <select id="goal">
+      <option value="">-- What’s your goal for the future? --</option>
+      <option value="entrepreneur">Start my own business</option>
+      <option value="career">Get a great career/job</option>
+      <option value="portfolio">Build my portfolio/resume</option>
+      <option value="learn">Learn from real-world experience</option>
+      <option value="connect">Meet new people and grow my network</option>
+      <option value="impact">Make a difference in my community</option>
+    </select>
+
+    <select id="personality">
+      <option value="">-- How would you describe yourself? --</option>
+      <option value="leader">A natural leader</option>
+      <option value="creator">A creative thinker</option>
+      <option value="helper">Helpful and empathetic</option>
+      <option value="problem">A problem-solver</option>
+      <option value="organizer">Super organized</option>
+      <option value="visionary">A big-picture visionary</option>
+      <option value="collaborator">Team player and collaborator</option>
+    </select>
+
+    <button onclick="getMatch()">💡 Find My Match!</button>
+    <div class="result" id="matchResult"></div>
+  </div>
+
+  <script>
+    function getMatch() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const grade = document.getElementById("grade").value;
+      const academics = document.getElementById("academics").value;
+      const activities = document.getElementById("activities").value;
+      const hobby = document.getElementById("hobby").value;
+      const study = document.getElementById("study").value;
+      const skill = document.getElementById("skill").value;
+      const goal = document.getElementById("goal").value;
+      const personality = document.getElementById("personality").value;
+      const result = document.getElementById("matchResult");
+
+      if (!name || !email || !grade || !academics || !hobby || !study || !skill || !goal || !personality) {
+        result.innerText = "❗ Please complete all required fields to get your match.";
+        return;
+      }
+
+      let matchText = `${name}, a ${grade} grade student studying ${academics}, who enjoys ${hobby}, and aims to ${goal}.
+Email: ${email}
+`;
+
+      switch (skill) {
+        case "social":
+          matchText += "🎯 You're a perfect match for businesses needing social media content.";
+          break;
+        case "design":
+          matchText += "🎨 You'd be great at helping local shops with branding and visuals.";
+          break;
+        case "finance":
+          matchText += "💼 Your finance skills could benefit small businesses with budgeting.";
+          break;
+        case "event":
+          matchText += "📅 You're ideal for helping organize events and fundraisers.";
+          break;
+        case "photo":
+          matchText += "📷 You'd be great with content creation and photography.";
+          break;
+        case "web":
+          matchText += "💻 You're the go-to person for web design and tech help.";
+          break;
+        case "service":
+          matchText += "🗣️ Your communication skills are great for customer-facing roles.";
+          break;
+        case "editing":
+          matchText += "🎬 Video editing skills make you perfect for content creators.";
+          break;
+        case "writing":
+          matchText += "📝 You're a strong candidate for business writing and media work.";
+          break;
+        case "research":
+          matchText += "🔍 You’d excel helping nonprofits or startups with analysis.";
+          break;
+        default:
+          matchText = "❗ Please select a skill to find your match.";
+      }
+
+      if (activities) {
+        matchText += `
+You're currently involved in: ${activities}.`;
+      }
+
+      result.innerText = matchText;
+    }
+  </script>
+</body>
+</html>
